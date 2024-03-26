@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Dashboard Administrativa</title>
+
+    <script> var fomrId = 5 </script>
+</head>
+
+<body>
+    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+        <a id="userName" class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#"></a>
+        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-nav">
+            <div class="nav-item text-nowrap">
+                <a class="nav-link px-3" href="#">Sign out</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column" id="menu">
+                    </ul>
+                </div>
+            </nav>
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <h2>Lista de Formularios </h2>
+                <div>
+                    <table class="table table-striped" id="tablaFormularios">
+                        <thead>
+                            <tr>
+                                <th>Id Formulario</th>
+                                <th>Nombre Formulario</th>
+                                <th>Estado Formulario</th>
+                                <th>URL Formulario</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <button id="btnConsultar" class="btn btn-primary" onclick="listarFormularios(event)">Actualizar Tabla de Formularios</button>
+
+                    <script>
+                        function listarFormularios(e) {
+                            e.preventDefault();
+                            // Simulando una solicitud a una API (reemplaza la URL con tu propia implementación)
+                            const apiUrl = 'http://localhost:3000/listaFormularios';
+
+                            fetch(apiUrl)
+                                .then(response => response.json())
+                                .then(data => {
+                                    const tablaFormularios = document.getElementById('tablaFormularios');
+
+                                    // Limpiar la tabla antes de agregar nuevos datos
+                                    tablaFormularios.innerHTML = '<tr><th>ID Formulario</th><th>Nombre Formulario</th><th>Estado Formulario</th> <th>URL Formulario</th> </tr>';
+
+                                    data.forEach(item => {
+                                        const row = document.createElement('tr');
+                                        row.innerHTML = `
+                                            <td>${item.Id_formulario}</td>
+                                            <td>${item.Nombre_formulario}</td>
+                                            <td>${item.Estado_formulario}</td>
+                                            <td>${item.Url_formulario}</td>
+                                        `;
+                                        tablaFormularios.appendChild(row);
+                                    });
+                                })
+                                .catch(error => console.error('Error:', error));
+                        }
+
+                        // Llama a la función al cargar la página
+                        document.addEventListener('DOMContentLoaded', listarFormularios);
+                    </script>
+
+                </div>
+                <div>
+                    <h2>Creación de nuevos Formularios</h2>
+                    <form id="formularioFormularios">
+                        <div class="mb-3">
+                            <label for="registro_id_formulario" class="form-label">Ingresa el id del nuevo formulario</label>
+                            <input type="text" id="registro_id_formulario" class="form-control">
+                            <label for="registro_nombre_vista" class="form-label">Ingresa el nombre del formulario</label>
+                            <input type="text" id="registro_nombre_vista" class="form-control">
+                            <label for="registro_estado_formulario" class="form-label" >Ingresa el estado del formulario</label>
+                            <input type="number" id="registro_estado_formulario" class="form-control" placeholder = "Ingresa 0 para estado de formulario inactivo o 1 para activo">
+                            <label for="registro_url_formulario" class="form-label" >Ingresa la URL del formulario</label>
+                            <input type="text" id="registro_url_formulario" class="form-control" >
+                            <br>
+                            <button id="btnCrear" class="btn btn-primary" onclick="crearFormulario(event)">Crear</button>
+                            <button id="btnEditar" class="btn btn-primary" onclick="editarFormulario(event)">Editar</button>
+                            <button id="btnEliminar" class="btn btn-primary" onclick="eliminarFormulario(event)">Eliminar</button>
+                        </div>
+
+                    </form>
+            </main>
+        </div>
+    </div>
+
+    <script src="../scripts/base.js"></script>
+</body>
+
+</html>

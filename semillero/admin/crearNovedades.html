@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Dashboard Administrativa</title>
+
+    <script> var fomrId = 6 </script>
+</head>
+
+<body>
+    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+        <a id="userName" class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/semillero/admin/home.html"></a>
+        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-nav">
+            <div class="nav-item text-nowrap">
+                <a class="nav-link px-3" href="/semillero/vistas/principal.html">Sign out</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column" id="menu">
+                        
+                    </ul>
+                </div>
+            </nav>
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <h2>Lista de Novedades</h2>
+                <div>
+                    <table class="table table-striped" id="tablaNovedades">
+                        <thead>
+                            <tr>
+                                <th>Imagen</th>
+                                <th>Id Novedad</th>
+                                <th>Nombre Novedad</th>
+                                <th>Fecha Novedad</th>
+                                <th>Hora Novedad</th>
+                                <th>Lugar</th>´
+                                <th>Descripcion Novedad</th>
+                                <th>Id Categoria</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <button class="btn btn-primary" onclick="listarNovedades(event)">Actualizar Tabla de
+                        Novedades</button>
+
+                    <script>
+                        function listarNovedades(e) {
+                            e.preventDefault();
+                            // Simulando una solicitud a una API (reemplaza la URL con tu propia implementación)
+                            const apiUrl = 'http://localhost:3000/listarNovedades';
+
+                            fetch(apiUrl)
+                                .then(response => response.json())
+                                .then(data => {
+                                    const tablaNovedades = document.getElementById('tablaNovedades');
+
+                                    // Limpiar la tabla antes de agregar nuevos datos
+                                    tablaNovedades.innerHTML = '<tr><th>Id Novedad</th><th>Nombre</th><th>Fecha</th><th>Hora</th><th>Lugar</th><th>Descripcion</th><th>Id Categoria</th></tr>';
+
+                                    data.forEach(item => {
+                                        const row = document.createElement('tr');
+                                        row.innerHTML = `
+                                            <td>${item.Id_novedad}</td>
+                                            <td>${item.Nombre_novedad}</td>
+                                            <td>${item.Fecha_novedad}</td>
+                                            <td>${item.Hora_novedad}</td>
+                                            <td>${item.Lugar_novedad}</td>
+                                            <td>${item.Descripcion_novedad}</td>
+                                            <td>${item.Id_categoria}</td>
+                                            
+
+                                        `;
+                                        tablaNovedades.appendChild(row);
+                                    });
+                                })
+                                .catch(error => console.error('Error:', error));
+                        }
+
+                        // Llama a la función al cargar la página
+                        document.addEventListener('DOMContentLoaded', listarNovedades);
+                    </script>
+
+                </div>
+                <div>
+                    <br>
+                    <h2>Creación de nuevas novedades</h2><br>
+                    <form id="formularioNovedades">
+                        <div class="mb-3">
+
+
+                            <label for="idNovedad" class="form-label">Id de la novedad:</label>
+                            <input type="text" class="form-control" name="id" id="idNovedad" aria-describedby="id">
+                            <br>
+                            
+                            <label for="nombreNovedad" class="form-label">Nombre de la novedad:</label>
+                            <input type="text" class="form-control" name="nombre" id="nombreNovedad"
+                                aria-describedby="nombre">
+
+                            <label for="fechaNovedad" class="form-label">Fecha:</label>
+                            <input type="date" class="form-control" name="fecha" id="fechaNovedad"
+                                aria-describedby="fecha">
+
+                            <label for="horaNovedad" class="form-label">Hora:</label>
+                            <input type="text" class="form-control" name="hora" id="horaNovedad"
+                                aria-describedby="hora">
+
+                            <label for="lugarNovedad" class="form-label">Lugar:</label>
+                            <input type="text" class="form-control" name="lugar" id="lugarNovedad"
+                                aria-describedby="lugar">
+
+                            <label for="descripcionNovedad" class="form-label">Descripción:</label>
+                            <textarea type="text" class="form-control" id="descripcionNovedad" name="descripcion"
+                                rows="4" cols="50" aria-describedby="descripcion"></textarea>
+
+                            <label for="selectCategorias" class="form-label">Seleccione la categoria</label>
+                            <select id="selectCategorias" class="form-select" aria-label="Default select example">
+                                <option selected></option>
+                            </select>
+                            <br>
+
+
+                            <label for="imagen">Imagen:</label>
+                            <input type="file" id="imagen" name="imagen" accept="image/*" required><br><br>
+
+                            <button id="btnCrear" class="btn btn-primary" onclick="crearEvento(event)">Crear</button>
+                            <button id="btnEditar" class="btn btn-primary" onclick="editarEvento(event)">Editar</button>
+                            <button id="btnEliminar" class="btn btn-primary" onclick="eliminarEvento(event)">Eliminar</button>
+                        </div>
+
+                    </form>
+                    <script>
+                        function listarCategorias() {
+                            // Simulando una solicitud a una API (reemplaza la URL con tu propia implementación)
+                            const apiUrl = 'http://localhost:3000/listaCategorias';
+
+                            fetch(apiUrl)
+                                .then(response => response.json())
+                                .then(data => {
+                                    const formSelect = document.getElementById('selectCategorias');
+
+                                    // Limpiar las opciones antes de agregar nuevas opciones
+                                    formSelect.innerHTML = '<option selected>Selecciona una categoria</option>';
+
+                                    data.forEach(item => {
+                                        const option = document.createElement('option');
+                                        option.value = item.Id_categoria;
+                                        option.textContent = item.Nombre_categoria;
+                                        formSelect.appendChild(option);
+                                    });
+                                })
+                                .catch(error => console.error('Error:', error));
+                        }
+                        document.addEventListener('DOMContentLoaded', listarCategorias);
+                    </script>
+
+            </main>
+        </div>
+    </div>
+
+    <script src="../scripts/base.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/semillero/admin/principalAdmin.html">Pagina de Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/semillero/admin/novedadesAdmin.html">Novedades en nuestro semillero</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/semillero/admin/admineventos.html">Creación de Eventos</a>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <a class="btn btn-outline-success" href="/semillero/principal.html">Cerrar Sesión</a>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <br>
+    <div>
+      <h3>Listado de usuarios de nuestro semillero</h3>
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Apellidos</th>
+              <th scope="col">Nro de Identificación</th>
+              <th scope="col">Nro de Contacto</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Juan</td>
+              <td>Quintana Roo</td>
+              <td>1020459000</td>
+              <td>3001234567</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Ana</td>
+              <td>Castrillon Perez</td>
+              <td>9845631</td>
+              <td>3109876543</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>Arturo</td>
+              <td>Reyes</td>
+              <td>1212413598</td>
+              <td>3204563298</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+    <br><br>
+    <div>
+      <h3>Listado de usuarios registrados a los eventos</h3>
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Apellidos</th>
+              <th scope="col">Nro de Contacto</th>
+              <th scope="col">Nombre de Evento</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Juan</td>
+              <td>Quintana Roo</td>
+              <td>3001234567</td>
+              <td>Motricidad fina para Adultos</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Ana</td>
+              <td>Castrillon Perez</td>
+              <td>3109876543</td>
+              <td>Expomotricidad</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>Arturo</td>
+              <td>Reyes</td>
+              <td>3204563298</td>
+              <td>Habilidades motrices básicas en niñ@s de 5 a 11 años</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+</body>
+</html>

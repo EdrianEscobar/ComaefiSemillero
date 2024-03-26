@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <title>Document</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:rgb(13,78, 22);">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="../vistas/principal.html">Pagina de
+              Inicio</a>
+          </li>
+      </div>
+    </div>
+  </nav>
+  <div class="container mt-4">
+    <div class="row">
+
+      <div id="novedades-container"></div>
+
+      <script>
+        // Función para cargar y mostrar las novedades
+        function listarNovUsers(e) {
+          e.preventDefault();
+          const apiUrl = 'http://localhost:3000/listarNoticiasUsers';
+          fetch(apiUrl)
+            .then(response => response.json())
+            .then(novedades => {
+              const container = document.getElementById('novedades-container');
+
+              novedades.forEach((novedad, index) => {
+                if (index % 3 === 0) {
+                  // Inicia una nueva fila cada 3 tarjetas (puedes ajustar el número según tus necesidades)
+                  const row = document.createElement('div');
+                  row.className = 'row';
+                  container.appendChild(row);
+                }
+
+                const card = document.createElement('div');
+                card.className = 'col-md-4'; // Utiliza Bootstrap para especificar el ancho de cada tarjeta
+                card.innerHTML = `
+                    <div class="card mb-4">
+                      <div class="card-body">
+                        <img src="${novedad.card.image}" class="card-img-top" alt="123">
+                        <h5 class="card-title">${novedad.card.title}</h5>
+                        <p class="card-text">${novedad.card.description}</p>
+                      </div>
+                    </div>
+                  `;
+                // Agrega la tarjeta a la fila actual
+                container.lastChild.appendChild(card);
+              });
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        // Llamar a la función al cargar la página
+        document.addEventListener('DOMContentLoaded', listarNovUsers);
+
+      </script>
+
+    </div>
+  </div>
+  <br><br><br>
+  <footer class="text-center text-lg-start bg-light text-muted">
+    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
+      style="background-color: rgb(13, 78, 22);">
+      <div class="me-5 d-none d-lg-block fw" style="color: white;">
+        <span>Espacio será utilizado para publicar redes sociales</span>
+      </div>
+    </section>
+    <section class="">
+      <div class="container text-center text-md-start mt-5">
+        <div class="row mt-3">
+          <div class="col-md-3 mx-auto mb-4">
+            <h6 class="text-uppercase fw-bold mb-4"><i class="fas fa-gem me-1"></i>Semillero de Motricidad</h6>
+            <p>Grupo de investigación Comunidad de Aprendizaje Currículo y Didáctica - COMAEFI perteneciente a la
+              factuldad de Educación Física, Recreación y Deporte del Politecnico Colombiano Jaime Isaza Cadavid</p>
+          </div>
+
+          <div class="col-md-3 mx-auto mb-4">
+            <h6 class="text-uppercase fw-bold mb-4">Contacto COMAEFI</h6>
+            <p><i class="fas fa-home me-1"></i>Bertha Aurora Muñoz Rodríguez</p>
+            <p><i class="fas fa-envelope me-1"></i>bamunozr@elpoli.edu.co</p>
+            <p><i class="fas fa-phone me-1"></i> 319 79 00 Ext 337</p>
+          </div>
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <h6 class="text-uppercase fw-bold mb-4">Contacto Semillero de Motricidad</h6>
+            <p><i class="fas fa-home me-3"></i>Juan Paulo Marín Castaño</p>
+            <p><i class="fas fa-envelope me-3"></i>juanmarin@elpoli.edu.co</p>
+            <p><i class="fas fa-envelope me-3"></i>semilleromotricidad@elpoli.edu.co</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="text-center p-4" style="background-color: rgb(13, 78, 22);color: white;">© 2023 Copyright:
+      <a class="text-reset fw-bold" style="color: white;"
+        href="https://www.politecnicojic.edu.co/">politecnicojic.edu.co</a>
+    </div>
+  </footer>
+  <script src="../scripts/base.js"></script>
+</body>
+
+</html>

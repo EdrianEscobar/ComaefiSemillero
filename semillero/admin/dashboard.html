@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Dashboard Administrativa</title>
+
+    <script> var fomrId = 1 </script>
+</head>
+
+<body>
+    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+        <a id="userName" class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#"></a>
+        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-nav">
+            <div class="nav-item text-nowrap">
+                <a class="nav-link px-3" href="/semillero/vistas/principal.html">Sign out</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column" id="menu">
+                    </ul>
+                </div>
+            </nav>
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div>
+                    
+                    <form id="formularioUsuarios">
+                        <h2>Formulario de creación de Usuarios</h2>
+                        <div class="mb-3">
+                            <label for="registro_id_usuario" class="form-label">Ingresa el número de identificación del
+                                nuevo usuario</label>
+                            <input type="text" id="registro_id_usuario" class="form-control">
+                            <label for="registro_nombres_usuario" class="form-label">Ingresa el/los nombres del nuevo
+                                usuario</label>
+                            <input type="text" id="registro_nombres_usuario" class="form-control">
+                            <label for="registro_apellidos1_usuario" class="form-label">Ingresa el primer apellido del
+                                nuevo usuario</label>
+                            <input type="text" id="registro_apellidos1_usuario" class="form-control">
+                            <label for="registro_apellidos2_usuario" class="form-label">Ingresa el segundo apellido del
+                                nuevo usuario</label>
+                            <input type="text" id="registro_apellidos2_usuario" class="form-control">
+                            <label for="registro_numero_usuario" class="form-label">Ingresa el numero de contacto del
+                                nuevo usuario</label>
+                            <input type="text" id="registro_numero_usuario" class="form-control">
+                            <label for="registro_contrasena_usuario" class="form-label">Ingresa la contraseña del nuevo
+                                usuario</label>
+                            <input type="password" id="registro_contrasena_usuario" class="form-control">
+                            <label for="selectPerfilUsuario" class="form-label">Selecciona el perfil del nuevo
+                                usuario</label>
+                            <select id="selectPerfilUsuario" class="form-select" aria-label="Default select example">
+                                <option selected></option>
+                            </select>
+                            <br>
+                            <button id="btnCrear" class="btn btn-primary" onclick="crearUsuario(event)">Crear</button>
+                            <button id="btnEditar" class="btn btn-primary" onclick="editarUsuario(event)">Editar</button>
+                            <button id="btnEliminar" class="btn btn-primary" onclick="eliminarUsuario(event)">Eliminar</button>
+                        </div>
+                        <script>
+                            
+                            function listarPerfiles() {
+                                // Simulando una solicitud a una API (reemplaza la URL con tu propia implementación)
+                                const apiUrl = 'http://localhost:3000/listaPerfiles';
+
+                                fetch(apiUrl)
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        const formSelect = document.getElementById('selectPerfilUsuario');
+
+                                        // Limpiar las opciones antes de agregar nuevas opciones
+                                        formSelect.innerHTML = '<option selected>Selecciona un perfil</option>';
+
+                                        data.forEach(item => {
+                                            const option = document.createElement('option');
+                                            option.value = item.Id_perfil; // Asigna el valor del Id_rol u otro identificador único
+                                            option.textContent = item.Nombre_perfil;
+                                            formSelect.appendChild(option);
+                                        });
+                                    })
+                                    .catch(error => console.error('Error:', error));
+                            }
+                            document.addEventListener('DOMContentLoaded', listarPerfiles);
+                        </script>
+
+                    </form>
+                </div>
+                <h2>Lista de Usuarios Semillero de Motricidad</h2>
+                <div>
+                    <table class="table table-striped" id="tablaUsuarios">
+                        <thead>
+                            <tr>
+                                <th>Id Usuario</th>
+                                <th>Nombre Usuario</th>
+                                <th>Primer Apellido </th>
+                                <th>Segundo Apellido</th>
+                                <th>Numero de Contacto</th>
+                                <th>Contraseña</th>
+                                <th>Id Perfil</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <button id="btnConsultar" class="btn btn-primary" onclick="listarUsuarios(event)">Actualizar Tabla de
+                        Usuarios</button>
+
+                    <script>
+                        function listarUsuarios(e) {
+                            e.preventDefault();
+                            // Simulando una solicitud a una API (reemplaza la URL con tu propia implementación)
+                            const apiUrl = 'http://localhost:3000/listarUsuarios';
+
+                            fetch(apiUrl)
+                                .then(response => response.json())
+                                .then(data => {
+                                    const tablaUsuarios = document.getElementById('tablaUsuarios');
+
+                                    // Limpiar la tabla antes de agregar nuevos datos
+                                    tablaUsuarios.innerHTML = '<tr><th>Id Usuario</th><th>Nombre</th><th>Primer Apellido</th><th>Segundo Apellido</th><th>Nro Contacto</th><th>Contraseña</th><th>Id Perfil</th></tr>';
+
+                                    data.forEach(item => {
+                                        const row = document.createElement('tr');
+                                        row.innerHTML = `
+                                            <td>${item.id_usuario}</td>
+                                            <td>${item.nombre_usuario}</td>
+                                            <td>${item.apellido1_usuario}</td>
+                                            <td>${item.apellido2_usuario}</td>
+                                            <td>${item.contacto_usuario}</td>
+                                            <td>${item.contrasena_usuario}</td>
+                                            <td>${item.id_perfil_usuario}</td>
+                                        `;
+                                        tablaUsuarios.appendChild(row);
+                                    });
+                                })
+                                .catch(error => console.error('Error:', error));
+                        }
+
+                        // Llama a la función al cargar la página
+                        document.addEventListener('DOMContentLoaded', listarUsuarios);
+                    </script>
+
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../scripts/base.js"></script>
+</body>
+
+</html>

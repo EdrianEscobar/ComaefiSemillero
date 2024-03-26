@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semillero de Motricidad</title>
+  <style data-tag="default-style-sheet">
+    html {
+      font-family: Inter;
+      font-size: 16px;
+    }
+
+    body {
+      font-weight: 400;
+      font-style: normal;
+      text-decoration: none;
+      text-transform: none;
+      letter-spacing: normal;
+      line-height: 1.15;
+      color: var(--dl-color-gray-black);
+      background-color: var(--dl-color-gray-white);
+      margin: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <link rel="stylesheet" href="./principal/style.css" />
+  <link href="./principal.css" rel="stylesheet" />
+
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:rgb(13,78, 22);">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" href="novedades.html">Noticias</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="../vistas/eventos.html">Eventos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#descripcion">Descripción</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#objGeneral">Objetivo General</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#objEspecificos">Objetivos Especificos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#mision">Misión</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#vision">Visión</a>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <button class="btn btn-outline-success" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasRegistro" aria-controls="offcanvasRegistro">Registrarse</button>
+          <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRegistro"
+            aria-labelledby="offcanvasRegistroLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasRegistroLabel">Registra tus datos</h5>
+              <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <div class="container text-center">
+                <div class="row">
+                  <div class="col">
+                    <form>
+                      <br>
+                      <br>
+                      <div class="mb-3">
+                        <label for="registroId" class="form-label">Nro de Identificación</label>
+                        <input type="number" class="form-control" name="id" id="registroId"
+                          aria-describedby="idUsuario">
+                      </div>
+                      <div class="mb-3">
+                        <label for="registroNombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" name="nombre" id="registroNombre"
+                          aria-describedby="nombreUsuario">
+                      </div>
+                      <div class="mb-3">
+                        <label for="registroApellidos1" class="form-label">Primer Apellido</label>
+                        <input type="text" class="form-control" name="apellidos" id="registroApellidos1"
+                          aria-describedby="apellidosUsuario">
+                      </div>
+                      <div class="mb-3">
+                        <label for="registroApellidos2" class="form-label">Segundo Apellido</label>
+                        <input type="text" class="form-control" name="apellidos" id="registroApellidos2"
+                          aria-describedby="apellidosUsuario">
+                      </div>
+                      <div class="mb-3">
+                        <label for="registroContacto" class="form-label">Nro de Contacto</label>
+                        <input type="number" class="form-control" name="contacto" id="registroContacto"
+                          aria-describedby="nroContacto">
+                      </div>
+                      <div class="mb-3">
+                        <label for="registroContrasena" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" name="contrasena" id="registroContrasena"
+                          aria-describedby="contrasena" autocomplete="off">
+                        <input id="check" type="checkbox">
+                        <script>
+                          check.onclick = togglePassword;
+
+                          function togglePassword() {
+                            if (check.checked) registroContrasena.type = "text";
+                            else registroContrasena.type = "password";
+                          }
+                        </script>
+                      </div>
+                      <button class="btn btn-primary" onclick="insert(event)">Registrarse</button>
+                    </form>
+                    <script>
+                      function insert(e) {
+                        e.preventDefault();
+                        const id = document.getElementById('registroId').value;
+                        const nombre = document.getElementById('registroNombre').value;
+                        const apellido1 = document.getElementById('registroApellidos1').value;
+                        const apellido2 = document.getElementById('registroApellidos2').value;
+                        const contacto = document.getElementById('registroContacto').value;
+                        const contrasena = document.getElementById('registroContrasena').value;
+
+                        // Crear un objeto con los datos a enviar al servidor
+                        const userData = {
+                          id: id,
+                          nombre: nombre,
+                          apellido1: apellido1,
+                          apellido2: apellido2,
+                          contacto: contacto,
+                          contrasena: contrasena
+                        };
+
+                        // Enviar los datos al servidor Node.js (usando fetch o XMLHttpRequest) se agrego /registrar para direccionar a la ruta
+                        fetch('http://localhost:3000/registrar', {
+                          method: 'POST',
+                          headers: {
+                            'Content-Type': 'application/json'
+                          },
+                          body: JSON.stringify(userData)
+                        })
+                          .then(response => response.json())
+                          .then(data => {
+                            console.log(data);
+                            if (data.status === 'Correcto') {
+                              alert('Usuario ingresado con éxito');
+                              // Redirecciona o realiza otras acciones de éxito aquí
+                              window.location.reload();
+                            } else {
+                              alert('Error al ingresar el usuario');
+                              // Realiza acciones de error aquí si es necesario
+                            }
+                          }).catch(error => {
+                            console.error(error);
+
+                          });
+
+                      }
+                    </script>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      <button class="btn btn-outline-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+        aria-controls="offcanvasRight">Iniciar Sesion</button>
+
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header">
+          <h5 id="offcanvasRightLabel">Ingresa tus datos</h5>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+
+          <body>
+            <div class="container text-center">
+              <div class="row">
+                <div class="col">
+                  <form>
+                    <br>
+                    <br>
+                    <div class="mb-3">
+                      <label for="id_usuario" class="form-label">Numero de identificación</label>
+                      <input type="Id_usuario" class="form-control" id="id_usuario" aria-describedby="Id_usuario"
+                        placeholder="Ingresa tu numero de identificación">
+                    </div>
+                    <div class="mb-3">
+                      <label for="contrasena" class="form-label">Contraseña</label>
+                      <input type="password" class="form-control" id="contrasena" aria-describedby="clave"
+                        placeholder="Ingresa tu contraseña">
+                      <input id="checkLogin" type="checkbox">
+                      <script>
+                        checkLogin.onclick = togglePassword;
+
+                        function togglePassword() {
+                          if (checkLogin.checked) contrasena.type = "text";
+                          else contrasena.type = "password";
+                        }
+                      </script>
+                    </div>
+                    <button class="btn btn-primary" onclick="loguear(event)">Ingresar</button>
+                    <!-- <button class="btn btn-primary" href="semillero/admin/material-dashboard-master/index.html">Admin</button> -->
+                  </form>
+                  <script>
+                    function loguear(e) {
+                      e.preventDefault();
+                      const id = document.getElementById('id_usuario').value;
+                      const contrasena = document.getElementById('contrasena').value;
+
+                      const userData = {
+                        id: id,
+                        contrasena: contrasena
+                      };
+                      fetch('http://localhost:3000/login', {
+                        method: 'POST',
+                        headers: {
+                          'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(userData)
+                      })
+                        .then(response => response.json())
+                        .then(data => {
+                          console.log(data); // Verificar el objeto data en la consola del cliente
+                          if (data.status === 'success') {
+
+                            let permisos = JSON.stringify(data.data.permisos);
+                            permisos = btoa(permisos);
+                            localStorage.setItem('permisos', permisos);
+
+                            let usuario = JSON.stringify(data.data.usuario);
+                            usuario = btoa(usuario);
+                            localStorage.setItem('usuario', usuario);
+
+                            if (data.data.usuario[2] == 1){
+                              window.location.href = '/semillero/usuario/principalusuario.html';
+                            } 
+                            else {
+                              window.location.href = '/semillero/admin/home.html';
+                            }
+
+                          } 
+                          else {
+                            alert('Error al loguear el usuario: ' + data.message);
+                          }
+                        })
+                        .catch(error => {
+                          console.error(error);
+                        });
+                    }
+                  </script>
+                </div>
+              </div>
+            </div>
+          </body>
+        </div>
+      </div>
+      </form>
+    </div>
+    </div>
+  </nav>
+  <br>
+
+  <div class="home-hero">
+    <div class="home-container02">
+      <h1 class="home-text">Semillero de Motricidad</h1>
+      <span class="home-text01">
+        <span>
+          <span>
+            Grupo de investigación Comunidad de Aprendizaje Currículo y Didáctica - COMAEFI perteneciente a la
+            factuldad de Educación Física, Recreación y Deporte del Politecnico Colombiano Jaime Isaza Cadavid.
+          </span>
+        </span>
+      </span>
+      <div class="home-btn-group1">
+        <a href="#descripcion" class="home-button1 button">Conoce mas sobre nosotros</a>
+      </div>
+    </div>
+    <img alt="image"
+      src="/semillero/anonimo/comaefi2.png"
+      class="home-image2" />
+  </div><br><br>
+
+  <div id="descripcion" class="home-testimonial-card">
+    <div class="home-testimonial">
+      <span class="home-text08">Descripción</span>
+      <span class="home-text09">
+        El semillero de investigación en motricidad está conformado por un grupo de docentes y estudiantes que
+        tienen
+        como finalidad, incorporar la investigación formativa al currículo, partiendo para ello de los procesos de
+        carácter pedagógico en los que se reflexiona en torno a las prácticas corporales en el marco de la
+        disciplina
+        de la educación física, la recreación y el deporte, a partir de las reflexiones en torna al cuerpo como
+        construcción social y cultural, y por tanto, capaz de expresar y comunicar con sentido sus prácticas y usos.
+        <br>
+        <br>
+        En este sentido, se fortalecen los procesos intersubjetivos que se hacen posible en el encuentro con los
+        otros
+        y con sus saberes, todo lo cual permite encontrar el sentido de lo que se hace con y desde el cuerpo como
+        una
+        manera de explorar el potencial del que dispone el ser humano y proyectarlo a través de aportes de carácter
+        epistemológico, pedagógico, social y artístico-cultural que se reflejan en los ámbitos de formación, la
+        investigación, la extensión y la apropiación social del conocimiento. Este semillero está conformado por
+        estudiantes y docentes de los programas de licenciatura en educación física, recreación y deporte y
+        profesional en deportes.
+      </span>
+    </div>
+    <img alt="profile" src="../anonimo/3.png" class="home-image3" />
+  </div>
+  <div id="objGeneral" class="home-testimonial-card1">
+    <img alt="profile"
+      src="../anonimo/2.png"
+      class="home-image4" />
+    <div class="home-testimonial1">
+      <span class="home-text10">Objetivo General</span>
+      <span class="home-text11">
+        Fomentar en los estudiantes y docentes el gusto por la investigación a través de reflexiones y
+        construcciones de conocimiento referidas a la motricidad, en contexto pedagógico y sociocultural en las que
+        el cuerpo y sus prácticas, constituyen posibilidades de expresión, comunicación y significación del mundo
+        que habita el ser humano.
+      </span>
+    </div>
+  </div>
+  <div id="objEspecificos" class="home-testimonial-card2">
+    <div class="home-testimonial2">
+      <span class="home-text12">Objetivos Específicos</span>
+      <span class="home-text13">
+        <ul>
+          <li>
+            Fortalecer el campo disciplinar a través de propuestas de investigación formativa que contribuyan a
+            resolver
+            situaciones emergentes del campo educativo, la motricidad y la educación física.</li>
+          <li>
+            Contribuir al mejoramiento de las prácticas de enseñanza del área de educación física a partir de
+            procesos
+            de capacitación relacionadas con la motricidad y sus elementos constitutivos, orientados a docentes y
+            estudiantes del área, de la facultad y a nivel local.</li>
+          <li>
+            Fomentar las manifestaciones expresivas y comunicativas del cuerpo a través de la organización y
+            desarrollo
+            de eventos culturales, artísticos y académicos a través de los cuales se afiance la identidad, se
+            potencia
+            el conocimiento disciplinar y se mejoren las relaciones con instituciones universitarias formadoras de
+            licenciados en educación física.</li>
+          <li>
+            Divulgar el conocimiento científico construido y reflexionado en los procesos formativos del semillero
+            en
+            diferentes espacios académicos institucionales, locales, regionales, nacionales e internacionales a los
+            que
+            dichas aportaciones sean pertinentes.</li>
+          <li>
+            Mejorar los indicadores de calidad de los procesos formativos e investigativos del área de motricidad,
+            al
+            impactar el currículo con las propuestas investigativas que se desarrollan según las necesidades
+            disciplinares y del contexto social y educativo.</li>
+        </ul>
+      </span>
+    </div>
+    <img alt="profile"
+      src="../anonimo/1.png"
+      class="home-image5" />
+  </div>
+  <div id="mision" class="home-testimonial-card1">
+    <img alt="profile"
+      src="../anonimo/4.png"
+      class="home-image6" />
+    <div class="home-testimonial3">
+      <span class="home-text14">Misión</span>
+      <span class="home-text15">
+        Contribuir a los procesos de formación e investigación considerando la motricidad como eje del pensamiento
+        constructivo de saberes y basada en una actitud crítica, reflexiva, propositiva y proyectiva de la disciplina
+        en procura de mejorar las condiciones educativas y socioculturales del orden institucional, local, nacional y
+        emergencias globales que involucren acciones y reflexiones en perspectiva de la Educación Física, la
+        Recreación y el Deporte.
+      </span>
+    </div>
+  </div>
+  
+  
+  <div id="vision" class="home-testimonial-card">
+    <div class="home-testimonial3">
+      <span class="home-text14">Visión</span>
+      <br>
+      <span class="home-text15">
+        Contribuir a los procesos de formación e investigación considerando la motricidad como eje del pensamiento
+        constructivo de saberes y basada en una actitud crítica, reflexiva, propositiva y proyectiva de la disciplina
+        en procura de mejorar las condiciones educativas y socioculturales del orden institucional, local, nacional y
+        emergencias globales que involucren acciones y reflexiones en perspectiva de la Educación Física, la
+        Recreación y el Deporte.
+      </span>
+    </div>
+    <img alt="profile"
+      src="../anonimo/5.png"
+      class="home-image6" />
+  </div>
+  <br><br>
+
+  <footer class="text-center text-lg-start bg-light text-muted">
+    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
+      style="background-color: rgb(13,78, 22);">
+      <div class="me-5 d-none d-lg-block fw" style="color: white;">
+        <span>Este espacio será utilizado para publicar redes sociales</span>
+      </div>
+    </section>
+    <section class="">
+      <div class="container text-center text-md-start mt-5">
+        <div class="row mt-3">
+          
+          
+          <div class="col-md-3 mx-auto mb-4">
+            <h6 class="text-uppercase fw-bold mb-4">Contacto COMAEFI</h6>
+            <p><i class="fas fa-home me-1"></i>Bertha Aurora Muñoz Rodríguez</p>
+            <p><i class="fas fa-envelope me-1"></i>bamunozr@elpoli.edu.co</p>
+            <p><i class="fas fa-phone me-1"></i> 319 79 00 Ext 337</p>
+          </div>
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <h6 class="text-uppercase fw-bold mb-4">Contacto Semillero de Motricidad</h6>
+            <p><i class="fas fa-home me-3"></i>Juan Paulo Marín Castaño</p>
+            <p><i class="fas fa-envelope me-3"></i>juanmarin@elpoli.edu.co</p>
+            <p><i class="fas fa-envelope me-3"></i>semilleromotricidad@elpoli.edu.co</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="text-center p-4" style="background-color: rgb(13, 78, 22);color: white;">© 2023 Copyright:
+      <a class="text-reset fw-bold" style="color: white;"
+        href="https://www.politecnicojic.edu.co/">politecnicojic.edu.co</a>
+    </div>
+  </footer>
+</body>
+
+</html>

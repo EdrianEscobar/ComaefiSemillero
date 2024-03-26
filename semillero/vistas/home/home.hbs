@@ -1,0 +1,40 @@
+<ul>
+    {{#each obj}}
+    <li>{{id_usuario}}</li>
+    <li>{{nombre}}</li>
+    <li>{{apellido}}</li>
+    <li>{{contacto}}</li>
+    <li>{{clave}}</li>
+    <li>{{codigo_rol}}</li>
+    {{/each}}
+</ul>
+
+<form action="/" method="POST">
+    <br>
+    <br>
+    <div class="mb-3">
+        <label for="registroId" class="form-label">Nro de Identificación</label>
+        <input type="Identificacion" class="form-control" name="id" id="registroId" aria-describedby="idUsuario"
+            placeholder="ingresar un id">
+    </div>
+    <div class="mb-3">
+        <label for="registroNombre" class="form-label">Nombre</label>
+        <input type="Nombre" class="form-control" name="nombre" id="registroNombre" aria-describedby="nombreUsuario">
+    </div>
+    <div class="mb-3">
+        <label for="registroApellidos" class="form-label">Apellidos</label>
+        <input type="Apellidos" class="form-control" name="apellidos" id="registroApellidos"
+            aria-describedby="apellidosUsuario">
+    </div>
+    <div class="mb-3">
+        <label for="registroContacto" class="form-label">Nro de Contacto</label>
+        <input type="Contacto" class="form-control" name="contacto" id="registroContacto"
+            aria-describedby="nroContacto">
+    </div>
+    <div class="mb-3">
+        <label for="registroContrasena" class="form-label">Contraseña</label>
+        <input type="contrasena" class="form-control" name="contrasena" id="registroContrasena"
+            aria-describedby="contrasena">
+    </div>
+    <button type="submit" class="btn btn-primary" onclick="insert()">Registrarse</button>
+</form>
