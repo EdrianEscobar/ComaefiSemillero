@@ -83,46 +83,94 @@
                     <form>
                       <br>
                       <br>
-                      <div class="mb-3">
-                        <label for="registroId" class="form-label">Nro de Identificación</label>
-                        <input type="number" class="form-control" name="id" id="registroId"
-                          aria-describedby="idUsuario">
-                      </div>
-                      <div class="mb-3">
-                        <label for="registroNombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" name="nombre" id="registroNombre"
-                          aria-describedby="nombreUsuario">
-                      </div>
-                      <div class="mb-3">
-                        <label for="registroApellidos1" class="form-label">Primer Apellido</label>
-                        <input type="text" class="form-control" name="apellidos" id="registroApellidos1"
-                          aria-describedby="apellidosUsuario">
-                      </div>
-                      <div class="mb-3">
-                        <label for="registroApellidos2" class="form-label">Segundo Apellido</label>
-                        <input type="text" class="form-control" name="apellidos" id="registroApellidos2"
-                          aria-describedby="apellidosUsuario">
-                      </div>
-                      <div class="mb-3">
-                        <label for="registroContacto" class="form-label">Nro de Contacto</label>
-                        <input type="number" class="form-control" name="contacto" id="registroContacto"
-                          aria-describedby="nroContacto">
-                      </div>
-                      <div class="mb-3">
-                        <label for="registroContrasena" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" name="contrasena" id="registroContrasena"
-                          aria-describedby="contrasena" autocomplete="off">
-                        <input id="check" type="checkbox">
+                      <form>
+                        <br>
+                        <br>
+                        <div class="mb-3">
+                          <label for="registroId" class="form-label">Nro de Identificación</label>
+                          <input type="number" class="form-control" name="id" id="registroId"
+                            aria-describedby="idUsuario" pattern="\d*" title="Solo números." maxlength="20">
+                        </div>
                         <script>
-                          check.onclick = togglePassword;
-
-                          function togglePassword() {
-                            if (check.checked) registroContrasena.type = "text";
-                            else registroContrasena.type = "password";
-                          }
+                          document.getElementById('registroId').addEventListener('input', function(e) {
+                            // Elimina cualquier caracter que no sea dígito numérico
+                            let inputValue = this.value.replace(/\D/g, '');
+                            
+                            // Limita la longitud del valor a un máximo de 10 caracteres
+                            if (inputValue.length > 20) {
+                              inputValue = inputValue.substring(0, 20); // Ajusta este número según la longitud máxima deseada
+                            }
+                            
+                            this.value = inputValue;
+                          });
+                        </script> 
+                        <div class="mb-3">
+                          <label for="registroNombre" class="form-label">Nombre</label>
+                          <input type="text" class="form-control" name="nombre" id="registroNombre"
+                            aria-describedby="nombreUsuario" pattern="[A-Za-z\s]+" title="Solo letras." maxlength="50">
+                        </div>
+                        <script>
+                          document.getElementById('registroNombre').addEventListener('input', function(e) {
+                            // Permite solo letras (y espacios si deseas permitir nombres compuestos)
+                            this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+                          });
+                        </script>  
+                        <div class="mb-3">
+                          <label for="registroApellidos1" class="form-label">Primer Apellido</label>
+                          <input type="text" class="form-control" name="apellidos" id="registroApellidos1"
+                            aria-describedby="apellidosUsuario" pattern="[A-Za-z\s]+" title="Solo letras." maxlength="30">
+                        </div>
+                        <script>
+                          document.getElementById('registroApellidos1').addEventListener('input', function(e) {
+                            // Permite solo letras (y espacios si deseas permitir nombres compuestos)
+                            this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+                          });
                         </script>
-                      </div>
-                      <button class="btn btn-primary" onclick="insert(event)">Registrarse</button>
+                        <div class="mb-3">
+                          <label for="registroApellidos2" class="form-label">Segundo Apellido</label>
+                          <input type="text" class="form-control" name="apellidos" id="registroApellidos2"
+                            aria-describedby="apellidosUsuario" pattern="[A-Za-z\s]+" title="Solo letras." maxlength="30">
+                        </div>
+                        <script>
+                          document.getElementById('registroApellidos2').addEventListener('input', function(e) {
+                            // Permite solo letras (y espacios si deseas permitir nombres compuestos)
+                            this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+                          });
+                        </script> 
+                        <div class="mb-3">
+                          <label for="registroContacto" class="form-label">Nro de Contacto</label>
+                          <input type="number" class="form-control" name="contacto" id="registroContacto"
+                            aria-describedby="nroContacto" pattern="[A-Za-z\s]+" title="Solo letras. " maxlength="15">
+                        </div>
+                        <script>
+                          document.getElementById('registroContacto').addEventListener('input', function(e) {
+                            // Elimina cualquier caracter que no sea dígito numérico
+                            let inputValue = this.value.replace(/\D/g, '');
+                            
+                            // Limita la longitud del valor a un máximo de 10 caracteres
+                            if (inputValue.length > 15) {
+                              inputValue = inputValue.substring(0, 15); // Ajusta este número según la longitud máxima deseada
+                            }
+                            
+                            this.value = inputValue;
+                          });
+                        </script>
+                        <div class="mb-3">
+                          <label for="registroContrasena" class="form-label">Contraseña</label>
+                          <input type="password" class="form-control" name="contrasena" id="registroContrasena"
+                            aria-describedby="contrasena" autocomplete="off" maxlength="15">
+                          <input id="check" type="checkbox">
+                          <script>
+                            check.onclick = togglePassword;
+  
+                            function togglePassword() {
+                              if (check.checked) registroContrasena.type = "text";
+                              else registroContrasena.type = "password";
+                            }
+                          </script>
+                        </div>
+                        <button class="btn btn-primary" onclick="insert(event)">Registrarse</button>
+                      </form>
                     </form>
                     <script>
                       function insert(e) {
@@ -165,9 +213,7 @@
                             }
                           }).catch(error => {
                             console.error(error);
-
                           });
-
                       }
                     </script>
                   </div>
@@ -290,7 +336,7 @@
       </div>
     </div>
     <img alt="image"
-      src="/semillero/anonimo/comaefi2.png"
+      src="/semillero/imagenes/comaefi.png"
       class="home-image2" />
   </div><br><br>
 
@@ -318,11 +364,11 @@
         profesional en deportes.
       </span>
     </div>
-    <img alt="profile" src="../anonimo/3.png" class="home-image3" />
+    <img alt="profile" src="/semillero/imagenes/1.png" class="home-image3" />
   </div>
   <div id="objGeneral" class="home-testimonial-card1">
     <img alt="profile"
-      src="../anonimo/2.png"
+      src="/semillero/imagenes/2.png"
       class="home-image4" />
     <div class="home-testimonial1">
       <span class="home-text10">Objetivo General</span>
@@ -370,12 +416,12 @@
       </span>
     </div>
     <img alt="profile"
-      src="../anonimo/1.png"
+      src="/semillero/imagenes/3.png"
       class="home-image5" />
   </div>
   <div id="mision" class="home-testimonial-card1">
     <img alt="profile"
-      src="../anonimo/4.png"
+      src="../imagenes/4.png"
       class="home-image6" />
     <div class="home-testimonial3">
       <span class="home-text14">Misión</span>
@@ -403,7 +449,7 @@
       </span>
     </div>
     <img alt="profile"
-      src="../anonimo/5.png"
+      src="../imagenes/5.png"
       class="home-image6" />
   </div>
   <br><br>
